@@ -10,17 +10,20 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
     @ratings = params[:ratings]
     @ratings_to_show = []
-    @sort_by = params[:sort_by]
+    @sort_by = params[:sort_by] 
     @movies = Movie.all.order(@sort_by)
-    @title_header = (params[:sort_by]=='title') ? 'hilite bg-warning' : ''
-    @release_date_header = (params[:sort_by]=='release_date') ? 'hilite bg-warning' : '
+
   
 
     if(@ratings)
+      session[:ratings] = @ratings
       @movies = Movie.where(rating: @ratings.keys)
+      
     end
 
-
+ 
+    @title_header = (params[:sort_by]=='title') ? 'hilite bg-warning' : ''
+    @release_date_header = (params[:sort_by]=='release_date') ? 'hilite bg-warning' : ''
   end
 
 
